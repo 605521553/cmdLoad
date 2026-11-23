@@ -121,7 +121,7 @@ npm run release
   "platforms": {
     "windows-x86_64": {
       "signature": "……minisign 签名……",
-      "url": "https://github.com/你的组织/你的仓库/releases/latest/download/Pata%20Commands_0.2.1_x64-setup.exe"
+      "url": "https://github.com/你的组织/你的仓库/releases/latest/download/Pata.Commands_0.2.1_x64-setup.exe"
     }
   }
 }
@@ -130,10 +130,10 @@ npm run release
 把以下三个文件上传到同一个 Release（或同一静态目录）：
 
 - `latest.json`
-- `Pata Commands_<version>_x64-setup.exe`
-- `Pata Commands_<version>_x64-setup.exe.sig`
+- `Pata.Commands_<version>_x64-setup.exe`
+- `Pata.Commands_<version>_x64-setup.exe.sig`
 
-> Tauri v2 + NSIS 的更新包就是签名的 `setup.exe`，配套 `.exe.sig`；`latest.json` 的 `url` 必须指向这个 exe，`signature` 必须来自同名 `.sig`。
+> Tauri v2 + NSIS 的更新包就是签名的 `setup.exe`，配套 `.exe.sig`；`latest.json` 的 `url` 必须指向这个 exe，`signature` 必须来自同名 `.sig`。GitHub Releases 会把上传文件名中的空格替换成点（`Pata.Commands_...exe`），构建脚本会同步生成这种点号命名，请保持一致。
 >
 > `notes` 可以写纯文本或 Markdown 文本，更新弹窗按纯文本显示并保留换行。可以传入发布说明文件：
 >

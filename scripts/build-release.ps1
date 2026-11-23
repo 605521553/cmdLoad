@@ -61,7 +61,11 @@ if (-not $DownloadBaseUrl) {
   }
 }
 $DownloadBaseUrl = $DownloadBaseUrl.TrimEnd("/")
-$encodedName = [uri]::EscapeDataString($installer.Name)
+# GitHub replaces spaces with dots in uploaded asset names; use the same name
+# in latest.json so the updater URL resolves on GitHub Releases.
+$assetName = $installer.Name -replace " ", "."
+$assetSigName = "$assetName.sig"
+$encodedName = [uri]::EscapeDataString($assetName)
 $downloadUrl = "$DownloadBaseUrl/$encodedName"
 
 $notes = "Pata Commands v$version"
@@ -87,13 +91,14 @@ New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
 $manifestPath = Join-Path $outputDir "latest.json"
 $json = $manifest | ConvertTo-Json -Depth 6
 [System.IO.File]::WriteAllText($manifestPath, $json, (New-Object System.Text.UTF8Encoding($false)))
-Copy-Item $installer.FullName $outputDir -Force
-Copy-Item $sigPath $outputDir -Force
+Copy-Item $installer.FullName (Join-Path $outputDir $assetName) -Force
+Copy-Item $sigPath (Join-Path $outputDir $assetSigName) -Force
 
 Write-Host ""
 Write-Host "Updater artifacts:" -ForegroundColor Green
 Write-Host "  manifest: $manifestPath"
-Write-Host "  package : $(Join-Path $outputDir $installer.Name)"
+Write-Host "  package : $(Join-Path $outputDir $assetName)"
+Write-Host "  sig     : $(Join-Path $outputDir $assetSigName)"
 Write-Host "  version : $version"
 Write-Host "  url     : $downloadUrl"
 Write-Host ""

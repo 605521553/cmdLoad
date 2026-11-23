@@ -4,6 +4,10 @@ Pata Commands 是面向 Windows 开发者的轻量级、本地优先命令工具
 
 当前版本 **v0.2.0**。
 
+- GitHub 仓库：https://github.com/605521553/cmdLoad
+- 下载最新安装包：https://github.com/605521553/cmdLoad/releases/latest
+- 在线更新清单：https://github.com/605521553/cmdLoad/releases/latest/download/latest.json
+
 ![快捷面板：剪贴板优先](docs/images/ui-quick-light.png)
 
 | 完整管理：三栏布局 | 快捷面板：命令库 |

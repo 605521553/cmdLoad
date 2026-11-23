@@ -260,8 +260,8 @@ npm run tauri build
 
 | 产物 | 结果 |
 | --- | --- |
-| Release 可执行文件 | ✅ `src-tauri/target/release/pata-commands.exe`，7,098,368 bytes；SHA-256 `F5D34BDFDF5332B69FCFE34C13B15908C2D6847BEA042A75145AF915884C28D5` |
-| NSIS 安装包 | ✅ `src-tauri/target/release/bundle/nsis/Pata Commands_0.2.0_x64-setup.exe`，2,899,757 bytes；SHA-256 `D66CE64EB72C2C3F3145FC372ED4A078FF07B8391230B3A919B86CCF407B322C`；另有 `.exe.sig` |
+| Release 可执行文件 | ✅ `src-tauri/target/release/pata-commands.exe`，7,098,368 bytes；SHA-256 `8ECD2C6254DC417FD071E8E014146EFA0586D2C37C7D01078E72AA167C7A095C` |
+| NSIS 安装包 | ✅ `src-tauri/target/release/bundle/nsis/Pata Commands_0.2.0_x64-setup.exe`，2,899,290 bytes；SHA-256 `B1FC3337EC380E7930844F15DC98F7CD5AFC89B6A53E7BFC8907ABB2B15802F6`；另有 `.exe.sig` |
 | 前端生产资源 | ✅ JS 594.87 kB（gzip 178.24 kB）、CSS 51.64 kB（gzip 9.70 kB） |
 | 安装路径 | `%LOCALAPPDATA%\Pata Commands` |
 | 静默安装 | 上一轮 0.2.0 基线已验证 installer exit 0；本轮重新构建安装包但未重复安装 |
@@ -624,7 +624,7 @@ npm run tauri build
 | 数据隔离 | ✅ 提示词页面不显示 Shell、执行风险、终端环境、AI 注释或行号 |
 | 提示词目录 | ✅ 切换命令库/提示词库时目录区只显示当前库；默认目录可拖入 |
 | 自动化复跑 | ✅ 28 个 Vitest 文件 / 154 个测试；116 个 Rust 测试；TypeScript、ESLint、rustfmt、Clippy、生产构建通过 |
-| Release 构建 | ✅ `npm run release` 成功；exe 7,098,368 bytes，NSIS 2,899,757 bytes，另生成 `.exe.sig` 和 `latest.json` |
+| Release 构建 | ✅ `npm run release` 成功；exe 7,098,368 bytes，NSIS 2,899,290 bytes，另生成 `.exe.sig` 和 `latest.json` |
 
 本轮实际测试产生的提示词仅用于验收，测试结束后已删除，`prompts` 和 `prompts_fts` 均为 0；用户原有 7 条命令保留。测试结束后已停止新 Release 进程并恢复 `autoHideQuickPanel=true`。
 
@@ -638,10 +638,10 @@ npm run tauri build
 | 前端单测 | ✅ 7 个更新状态测试：可用/无更新/手动提示/静默失败/下载进度/占位端点/网络错误/稍后提醒 |
 | 签名构建 | ✅ `npm run release` 生成 `Pata Commands_0.2.0_x64-setup.exe`、`.exe.sig` 和 `artifacts/updater/latest.json` |
 | 清单格式 | ✅ UTF-8 无 BOM；`windows-x86_64.signature` 来自 `.exe.sig`，`url` 指向签名 setup.exe |
-| 占位保护 | ✅ endpoint 仍为 `your-org` 时 `configured=false`，设置页「检查更新」禁用，不会误报“已是最新版本” |
+| 配置检测 | ✅ endpoint 已指向实际仓库；未配置时 `configured=false`，设置页「检查更新」禁用，不会误报“已是最新版本” |
 | 启动检查 | ✅ 代码路径为启动 4 秒后静默检查一次；有新版本才弹窗，失败不打断 |
 | 更新 UI | ✅ 设置页显示当前版本/更新源/状态；更新弹窗含版本、日期、更新说明、进度和稍后 |
 | 实际服务器下载 | ⏳ 未执行：需要先把 endpoint 改成真实 HTTPS 地址并上传 latest.json + setup.exe + sig |
 | 安装重启 | ⏳ 未执行：需真实服务器和 0.2.0→0.2.1 两个签名版本联调 |
 
-> 在线更新没有做真实服务器下载/安装验收，因为当前仓库没有发布域名和 0.2.1 更新包。签名构建、清单生成、占位保护和前端状态已通过自动化验证；发布前按 [在线更新](updater.md#6-本地联调不发布) 做一次两版本联调。
+> 在线更新没有做真实 Release 下载/安装验收，因为尚未上传 0.2.1 更新包。签名构建、清单生成、配置检测和前端状态已通过自动化验证；发布前按 [在线更新](updater.md#6-本地联调不发布) 做一次两版本联调。

@@ -110,7 +110,7 @@ Pata Commands 是面向 Windows 开发者的轻量级、本地优先命令工具
   - 显示下载进度、大小和更新内容，下载完成后运行 NSIS 安装并自动重启；
   - 更新包使用 minisign 公钥校验，私钥只保存在本机 `src-tauri/updater-keys/`（已 gitignore）；
   - 更新保留命令、提示词、设置、备份和凭据；
-  - 发布前只需把 `tauri.conf.json` 的 `plugins.updater.endpoints` 改成自己的 `latest.json` 地址，并用 `npm run release` 构建。
+  - 更新源已指向 `https://github.com/605521553/cmdLoad/releases/latest/download/latest.json`，发布新版本时执行 `npm run release` 并上传生成的资产即可。
   - 详见 [在线更新说明](docs/updater.md)。
 
 工作流仍未实现；导航中继续显示明确的占位说明。
@@ -382,18 +382,18 @@ src-tauri/src/
 - Shell 隐藏只改变前端显示，数据库 `shell` 原值保留；编辑器选择 `unknown` 时选项显示为“不显示”。
 - Tauri 原生文件拖放已关闭（`dragDropEnabled: false`），这是 Windows 上使用 HTML5 拖放的必需配置；文件导入仍走文件选择器。
 - AI 注释的 JSON 导出尚未包含 `ai_annotations` 表；数据库备份恢复包含。批量生成由前端逐条驱动，退出应用会中止当前批次；自动请求没有单独停止按钮。
-- 工作流、云同步和代码签名未实现；在线更新已接入，但 `tauri.conf.json` 的更新源仍是 `your-org` 占位，发布前必须改成自己的 `latest.json` 地址。首次安装必须使用包含 updater 的构建；未签名安装包仍可能触发 SmartScreen。
+- 工作流、云同步和代码签名未实现；在线更新已接入，endpoint 指向 `605521553/cmdLoad` 的 GitHub Releases。首次安装必须使用包含 updater 的构建；未签名安装包仍可能触发 SmartScreen。
 - 多显示器/非 100% DPI 只有算法单测。
 - 旧 schema 数据库备份不能直接恢复（当前只接受 v5）；JSON schema 1–4 可以导入；数据库 v5 / 设置 schema 5。
 
 ## 构建产物
 
 - Release 可执行文件：`src-tauri/target/release/pata-commands.exe`，7,098,368 bytes
-  - SHA-256：`F5D34BDFDF5332B69FCFE34C13B15908C2D6847BEA042A75145AF915884C28D5`
-- NSIS 安装包：`src-tauri/target/release/bundle/nsis/Pata Commands_0.2.0_x64-setup.exe`，2,899,757 bytes
-  - SHA-256：`D66CE64EB72C2C3F3145FC372ED4A078FF07B8391230B3A919B86CCF407B322C`
+  - SHA-256：`8ECD2C6254DC417FD071E8E014146EFA0586D2C37C7D01078E72AA167C7A095C`
+- NSIS 安装包：`src-tauri/target/release/bundle/nsis/Pata Commands_0.2.0_x64-setup.exe`，2,899,290 bytes
+  - SHA-256：`B1FC3337EC380E7930844F15DC98F7CD5AFC89B6A53E7BFC8907ABB2B15802F6`
   - 更新签名：`Pata Commands_0.2.0_x64-setup.exe.sig`
-- 更新清单：`artifacts/updater/latest.json`（当前仍指向 `your-org` 占位地址）
+- 更新清单：`artifacts/updater/latest.json`（指向 `605521553/cmdLoad` Releases）
 - 生产前端资源（Tauri release）：JS 594.87 kB（gzip 178.24 kB）、CSS 51.64 kB（gzip 9.70 kB）。
 - 本轮 Release 与 NSIS 安装包已重新构建；Release 实际启动、数据库 v4 → v5 迁移、快捷面板保存提示词和管理器提示词页完成交互验收。安装包的静默安装/卸载复验沿用上一轮记录，本轮未重复执行。
 

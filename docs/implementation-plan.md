@@ -122,7 +122,7 @@
 - `bundle.createUpdaterArtifacts=true`，NSIS `passive` 安装；签名构建生成 `setup.exe`、`.exe.sig` 和 `latest.json`。
 - 启动 4 秒静默检查；设置页手动检查；更新弹窗显示版本、说明、进度和稍后提醒。
 - 生成并保存本地 minisign 密钥；公钥进入 `tauri.conf.json`，私钥目录 gitignore。
-- 当前 endpoint 仍是 `your-org` 占位，`configured=false` 时检查和按钮禁用。
+- endpoint 已指向 `605521553/cmdLoad` 的 GitHub Releases；未配置时检查和按钮仍禁用。
 - 待办：替换正式 HTTPS endpoint、准备 0.2.1 更新包、做真实下载/签名/安装/重启联调；再考虑 CI 发布和代码签名。
 
 ## 阶段六：发布质量（部分完成）

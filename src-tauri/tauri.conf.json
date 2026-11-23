@@ -38,7 +38,7 @@
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDIxMjNGREM3NUZGNjc2OTUKUldTVmR2WmZ4LzBqSVJIMjdiS3lHVGlGeThzYTgwM3NDUU1mVnJ3bTA5emYyUkh3RExVVjVqWkEK",
       "endpoints": [
-        "https://github.com/your-org/pata-commands/releases/latest/download/latest.json"
+        "https://github.com/605521553/cmdLoad/releases/latest/download/latest.json"
       ],
       "windows": {
         "installMode": "passive"

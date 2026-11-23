@@ -4,7 +4,7 @@ version = "0.2.0"
 description = "Pata Commands — local-first command manager for Windows developers"
 authors = ["Pata Commands Contributors"]
 license = "MIT"
-repository = ""
+repository = "https://github.com/605521553/cmdLoad"
 edition = "2021"
 rust-version = "1.90"
 

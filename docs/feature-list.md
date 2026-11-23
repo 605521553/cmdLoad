@@ -339,8 +339,8 @@
 - ✅ minisign 公钥校验；私钥只在本机 `src-tauri/updater-keys/`，不进入安装包。
 - ✅ `npm run release` 读取签名密钥，生成 setup.exe、`.exe.sig` 和 `latest.json`。
 - ✅ 更新保留命令、提示词、设置、备份和凭据。
-- ✅ endpoint 未配置时禁用检查并明确提示，避免误报最新。
-- ⏳ 当前 endpoint 仍是 `your-org` 占位；需要改地址并上传更新文件后才能对真实用户生效。
+- ✅ endpoint 已指向 `605521553/cmdLoad` 的 GitHub Releases；未配置时仍会禁用检查并明确提示。
+- ⏳ 尚未上传第一个 0.2.1 `latest.json` 和签名安装包；发布 Release 后正式生效。
 - ⏳ 首次安装必须是包含 updater 的构建；更早版本无法自动升级。
 
 ## 设置与数据工具

@@ -975,12 +975,12 @@
 
 - 本地生成 minisign 密钥：`src-tauri/updater-keys/`，加入 `.gitignore`；公钥写入配置。
 - `npm run release` 读取私钥/密码，执行 `tauri build`，生成 setup.exe、`.exe.sig` 和 `artifacts/updater/latest.json`。
-- 新增 `get_update_configuration` 命令：检测 endpoint 是否仍是 `your-org`，未配置时禁用检查，避免误报最新。
+- 新增 `get_update_configuration` 命令：检测 endpoint 是否已配置，未配置时禁用检查，避免误报最新。
 - `latest.json` 由脚本生成 UTF-8 无 BOM，`windows-x86_64.signature` 来自 `.exe.sig`。
 
 ### 3. 当前边界
 
-- endpoint 仍为 `https://github.com/your-org/pata-commands/releases/latest/download/latest.json`，真实用户更新尚未生效。
+- endpoint 已配置为 `https://github.com/605521553/cmdLoad/releases/latest/download/latest.json`；尚未上传 0.2.1 Release，真实用户更新暂未生效。
 - 未做真实 HTTPS 服务器下载/安装/重启联调；未配置代码签名证书。
 - 首次安装必须使用包含 updater 的构建；更早版本无法自动升级。
 - 详见 [在线更新说明](updater.md)。
@@ -988,13 +988,13 @@
 ## 构建产物
 
 - Release 可执行文件：`src-tauri/target/release/pata-commands.exe`，7,098,368 bytes
-  - SHA-256：`F5D34BDFDF5332B69FCFE34C13B15908C2D6847BEA042A75145AF915884C28D5`
-- NSIS 安装包：`src-tauri/target/release/bundle/nsis/Pata Commands_0.2.0_x64-setup.exe`，2,899,757 bytes
-  - SHA-256：`D66CE64EB72C2C3F3145FC372ED4A078FF07B8391230B3A919B86CCF407B322C`
+  - SHA-256：`8ECD2C6254DC417FD071E8E014146EFA0586D2C37C7D01078E72AA167C7A095C`
+- NSIS 安装包：`src-tauri/target/release/bundle/nsis/Pata Commands_0.2.0_x64-setup.exe`，2,899,290 bytes
+  - SHA-256：`B1FC3337EC380E7930844F15DC98F7CD5AFC89B6A53E7BFC8907ABB2B15802F6`
 - 更新签名与清单：`Pata Commands_0.2.0_x64-setup.exe.sig`、`artifacts/updater/latest.json`
 - Tauri 生产资源（release 构建，chrome105 target）：JS 594.87 kB（gzip 178.24 kB）、CSS 51.64 kB（gzip 9.70 kB）。
 - 本轮 Release 实际启动完成数据库 v4→v5 迁移（7 条命令保留），快捷面板保存提示词和管理器提示词页完成实际桌面交互验收；NSIS 安装/卸载复验沿用上一轮记录，本轮未重复执行。
-- `npm run release` 已验证签名构建：生成 setup.exe、`.exe.sig` 和 `latest.json`；更新源仍为占位地址，未做真实服务器下载验收。
+- `npm run release` 已验证签名构建：生成 setup.exe、`.exe.sig` 和 `latest.json`；更新源已指向实际仓库，但未做真实 Release 下载验收。
 - 安装包未配置代码签名证书。
 
 详细操作和测试限制见 [测试记录](testing.md#8-构建与打包)。

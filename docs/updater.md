@@ -2,7 +2,7 @@
 
 > 当前代码已经接入 Tauri v2 Updater：设置页有「软件更新」，应用启动 4 秒后静默检查一次；发现新版本会弹出更新对话框，下载并安装后自动重启。更新包使用 minisign 公钥校验签名。
 >
-> **上线前唯一必须修改的是更新源地址**：`src-tauri/tauri.conf.json` 的 `plugins.updater.endpoints` 目前是 `your-org` 占位地址。修改并重新构建后，`get_update_configuration` 才会返回 `configured: true`，检查更新按钮才会启用。
+> 当前仓库已配置为 `https://github.com/605521553/cmdLoad/releases/latest/download/latest.json`，`get_update_configuration` 会返回 `configured: true`。如果以后更换仓库或使用自建 HTTPS 服务器，只需修改 `src-tauri/tauri.conf.json` 的 `plugins.updater.endpoints` 并重新构建。
 
 ## 1. 整体流程
 
@@ -185,14 +185,14 @@ python -m http.server 8787
 - 更新源必须使用 HTTPS；开发联调可用 HTTP，但不要用于正式发布。
 - Windows 使用 NSIS `passive` 安装模式；安装过程中会出现系统安装进度，应用会退出并由安装器重启。
 - 自动更新不会自动回滚。若新版本有问题，发布一个更高版本修复；不要让用户降级。
-- 当前 `latest.json` 端点仍是 `your-org` 占位，**未配置时检查更新按钮禁用**，避免给用户“已是最新版本”的错误结论。
+- 当前 endpoint 指向 `605521553/cmdLoad` 的 GitHub Releases；尚未上传第一个 `latest.json` 时，启动检查会静默失败，设置页会显示错误。发布 0.2.1 Release 后即可生效。
 - SmartScreen 代码签名证书与 updater 签名是独立的两件事；正式分发建议两者都配置。
 
 ## 9. 常见问题
 
 | 现象 | 原因 / 处理 |
 | --- | --- |
-| 检查更新按钮灰色 | `plugins.updater.endpoints` 仍是 `your-org` 或公钥为空；改地址并重新构建 |
+| 检查更新按钮灰色 | `plugins.updater.endpoints` 未配置或公钥为空；改地址并重新构建 |
 | 404 / 无法连接 | latest.json 未上传、路径不对、Release 未发布或仓库为私有 |
 | 提示签名无效 | 私钥与 `pubkey` 不匹配；或 latest.json 的签名不是本次 setup.exe 的 `.sig` |
 | 不提示新版本 | `version` 未严格大于客户端版本；检查版本号三处是否一致 |

@@ -56,7 +56,7 @@ if (-not $DownloadBaseUrl) {
     if ($endpoint -and $endpoint -notmatch "your-org") {
       $DownloadBaseUrl = $endpoint -replace "/latest\.json$", ""
     } else {
-      $DownloadBaseUrl = "https://github.com/your-org/pata-commands/releases/latest/download"
+      $DownloadBaseUrl = "https://github.com/605521553/cmdLoad/releases/latest/download"
     }
   }
 }

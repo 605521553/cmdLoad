@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Pata Commands",
+  "version": "0.2.0",
+  "identifier": "com.pata.commands",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Pata Commands",
+        "width": 900,
+        "height": 650,
+        "minWidth": 360,
+        "minHeight": 300,
+        "center": true,
+        "resizable": true,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": true,
+        "transparent": false,
+        "focus": true,
+        "dragDropEnabled": false,
+        "backgroundColor": "#f9f9f7"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost ws://127.0.0.1:1420 http://127.0.0.1:1420; img-src 'self' data: asset: http://asset.localhost; style-src 'self' 'unsafe-inline'; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'",
+      "capabilities": ["default"]
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDIxMjNGREM3NUZGNjc2OTUKUldTVmR2WmZ4LzBqSVJIMjdiS3lHVGlGeThzYTgwM3NDUU1mVnJ3bTA5emYyUkh3RExVVjVqWkEK",
+      "endpoints": [
+        "https://github.com/your-org/pata-commands/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "createUpdaterArtifacts": true,
+    "targets": ["nsis"],
+    "publisher": "Pata Commands",
+    "copyright": "Copyright © 2026 Pata Commands Contributors",
+    "category": "DeveloperTool",
+    "shortDescription": "轻量、本地优先的开发者命令管理工具",
+    "longDescription": "Pata Commands 是一个常驻 Windows 系统托盘的开发者命令管理工具，支持命令收藏、分类、工作流以及用户自配置的 AI 注释。",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "displayLanguageSelector": false,
+        "languages": ["SimpChinese", "English"],
+        "installerIcon": "icons/icon.ico"
+      }
+    }
+  }
+}
